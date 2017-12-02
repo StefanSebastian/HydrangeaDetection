@@ -29,12 +29,43 @@ def compare_results():
 
     inverse = compare_reference_set(unsupervised_res)
 
+    true_positives = 0
+    true_negatives = 0
+    false_positives = 0
+    false_negatives = 0
+
     correct = 0
     for i in range(size):
-        if inverse == 0 and unsupervised_res[i] == expected[i]:
-            correct += 1
-        if inverse == 1 and unsupervised_res[i] != expected[i]:
-            correct += 1
+        if inverse == 0:
+            res = int(unsupervised_res[i])
+            exp = int(expected[i])
+            if res == exp:
+                correct += 1
+            if exp == 1 and res == 1:
+                true_positives += 1
+            if exp == 0 and res == 0:
+                true_negatives += 1
+            if exp == 1 and res == 0:
+                false_negatives += 1
+            if exp == 0 and res == 1:
+                false_positives += 1
+        if inverse == 1:
+            res = int(unsupervised_res[i])
+            exp = int(expected[i])
+            if res != exp:
+                correct += 1
+            if exp == 1 and res == 1:
+                true_negatives += 1
+            if exp == 0 and res == 0:
+                true_positives += 1
+            if exp == 1 and res == 0:
+                false_positives += 1
+            if exp == 0 and res == 1:
+                false_negatives += 1
 
     acc = correct / size
     print("Accuracy : " + str(acc))
+    precision = true_positives / (true_positives + false_positives)
+    recall = true_positives / (true_positives + false_negatives)
+    print("Precision : " + str(precision))
+    print("Recall : " + str(recall))
