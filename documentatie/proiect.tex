@@ -9,7 +9,11 @@
 \date{\today}
 \maketitle
 
-\pagebreak
+\newpage
+
+\tableofcontents
+
+\newpage
 
 \section{Introducere}
 O specie de animal sau planta introdusa intr-un mediu nou fata de cel in care a evoluat este invaziva daca se inmulteste intr-un ritm rapid si afecteaza mediul in mod negativ, distrugand habitate sau decimand specii locale\cite{WEBSITE:1}.
@@ -34,6 +38,16 @@ In aceasta lucrare a fost folosita metoda ‘transfer learning’ care presupune
 
 \subsection{Transfer learning de la VGG16}
 In Visual Classifier for Invasive Plant Species\cite{ARTICLE:4} s-au folosit diferite modele bazate pe retele neuronale convolutive preantrenate VGG16, s-a incercat augmentarea setului de date folosind translatii verticale, orizontale, modificarea contrastului, etc. VGG16 este o retea preantrenata pentru a extrage trasaturi (feature-uri). Dupa aceasta retea s-au adaugat 2-3 straturi complet conectate (fully connected). Pentru a preveni alterarea majora a retelei VGG16, s-a folosit Stochastic Gradient Descent, cu o rata mica de invatare. S-a folosit functia de activare ReLU. Ca masura a rezultatului modelului s-a folosit AUROC (“Area Under the Receiver Operating Characteristic curve“). S-a observat ca prin augmentarea datelor performanta modelelor a scazut, posibil din cauza zgomotului introdus de procesele de augmentare.
+
+\section{Metoda de lucru}
+
+\subsection{Invatare nesupervizata din informatii extrase de autoencoders}
+Primul pas consta in prelucrarea imaginilor de antrenament prin redimensionare sau convertire la alb-negru. Aceste imagini sunt folosite apoi pentru a antrena un autoencoder.
+
+Un autoencoder este o retea neurala care seteaza valoarea de iesire ca fiind egala cu cea de intrare, deci incearca sa invete functia de identitate. Prin setarea unor constrangeri (dimensiuni reduse) algoritmul poate invata anumite caracteristici ale datelor\cite{BOOK:2}. In aceasta abordare am folosit un autoencoder bazat pe retele convolutive, format din mai multe straturi de convolutie, maxpooling si upsampling dispuse in ‘oglinda’. Modelul de codificare este un strat intermediar al autoencoderului.
+
+Modelul invatat de autoencoder e folosit pentru a extrage reprezentarea codificata a imaginilor, fiecare tablou extras de CNN reprezentand o caracteristica(feature). Aceste caracteristici sunt combinate intr-un singur tablou si folosite ca date de intrare pentru un algoritm de clusterizare (K-Means). Pentru a stabili daca etichetele generate de algoritmul nesupervizat corespund celor atasate imaginilor am comparat rezultatele cu un set de imagini de referinta alese de mana.
+
 
 
 \bibliography{bibliografie} 
