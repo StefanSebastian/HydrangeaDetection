@@ -73,7 +73,7 @@ Pentru acest proiect am folosit setul de date aferent competitiei Invasive Speci
 
 \section{Parametraj algoritmi}
 
-\subsection{Abordarea 1}
+\subsection{Invatarea nesupervizata cu autoencoders}
 
 \subsubsection{Arhitectura}
 In primul rand am incercat sa determin cea mai potrivita arhitectura pentru autoencoder. Am rulat mai multe experimente, cu 1, 3 si 4 straturi de convolutie in modelul de codificare. Am observat ca acuratetea nu variaza foarte mult, deci am ales sa folosesc un singur strat de convolutie pentru simplitate.\ref{tab:arh}
@@ -148,7 +148,7 @@ Am folosit doua configurari pentru evaluarea acestor functii \ref{tab:configDist
 Rezultatele se pot vedea in tabelul \ref{tab:resDist}. Cele mai bune rezultate le-am obtinut folosind distanta Cosinus.
 \begin{table}[h!]
   \begin{center}
-    \caption{Configurari}
+    \caption{Rezultate distante}
     \label{tab:resDist}
     \begin{tabular}{c|c|c|c}
       \textbf{Configuration} & \textbf{Accuracy} & \textbf{Distance} & \textbf{Library} \\
@@ -165,7 +165,70 @@ Rezultatele se pot vedea in tabelul \ref{tab:resDist}. Cele mai bune rezultate l
   \end{center}
 \end{table}
 
+\subsubsection{Batch size}
+Am expermentat cu mai multe valori pentru batch size folosind parametrii determinati in sectiunile anterioare \ref{tab:resBatch}. Exceptand valorile mici(10), rezultatele sunt similare.  
+\begin{table}[h!]
+  \begin{center}
+    \caption{Rezultate batch size}
+    \label{tab:resBatch}
+    \begin{tabular}{c|c|c|c}
+      \textbf{BatchSize} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} \\
+      \hline
+      10 & 47\% & 0.67 & 0.31 \\
+      50 & 63\% & 0.76 & 0.61 \\
+     150 & 65\% & 0.76 & 0.63 \\
+     300 & 64\% & 0.76 & 0.61 \\
+      \end{tabular}
+  \end{center}
+\end{table}
 
+\section{Metricile de evaluare folosite}
+\begin{itemize}
+  \item Accuracy = raportul dintre numarul de imagini clasificate corect si numarul total de imagini
+	\begin{equation*}
+	acc = \frac{\#corect}{\#total}
+	\end{equation*}
+  \item Precision = procentul de imagini pozitive identificate corect din toate imaginile identificate ca pozitive
+	\begin{equation*}
+	p = \frac{tp}{tp + fp}
+	\end{equation*}
+  \item Recall = procentul de imagini pozitive identificate corect din toate imaginile pozitive
+	\begin{equation*}
+	r = \frac{tp}{tp + fn}
+	\end{equation*}
+\end{itemize}
+unde 
+\begin{itemize}
+  \item tp = true postives, imagini pozitive identificate corect
+  \item fp = false positives, imagini negative identificate incorect
+  \item tn = true negatives, imagini negative identificate corect
+  \item fn = false negatives, imagini pozitive identificate incorect
+\end{itemize}
+
+\section{Rezultate numerice}
+
+\subsection{Invatare nesupervizata cu autoencoders}
+
+Folosind parametrii optimi determinati experimental, imagini prelucrate la dimensiuni de (200, 200), color, functia de distanta Cosinus, encoding cu un singur strat convolutiv pe toate cele 2295 de imagini am obtinut urmatoarele rezultate \ref{tab:resNum}.
+\begin{table}[h!]
+  \begin{center}
+    \caption{Rezultate batch size}
+    \label{tab:resNum}
+    \begin{tabular}{c|c|c|c|c}
+      \textbf{Epochs} & \textbf{BatchSize} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} \\
+      \hline
+      10 & 150 & 65\% & 0.76 & 0.65 \\
+      20 & 200 & 64\% & 0.75 & 0.63 \\
+      20 & 150 & 64\% & 0.75 & 0.63 \\
+      \end{tabular}
+  \end{center}
+\end{table}
+
+
+\section{Concluzii}
+
+Pentru algoritmul cu autoencoders se pierd informatii la partea de codificare fapt indicat de valoarea mare de loss a algoritmului, in jur de 0.6 la toate experimentele. S-ar putea obtine valori mai bune pentru dimensiuni mai mari ale imaginii insa nu am avut hardware-ul necesar.
+to-do
 
 \newpage
 \bibliography{bibliografie} 
