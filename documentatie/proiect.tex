@@ -2,6 +2,8 @@
 
 \usepackage{url}
 \usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{subcaption}
 
 \begin{document}
 \title{Detectia automata a speciilor invazive in imagini}
@@ -48,7 +50,22 @@ Un autoencoder este o retea neurala care seteaza valoarea de iesire ca fiind ega
 
 Modelul invatat de autoencoder e folosit pentru a extrage reprezentarea codificata a imaginilor, fiecare tablou extras de CNN reprezentand o caracteristica(feature). Aceste caracteristici sunt combinate intr-un singur tablou si folosite ca date de intrare pentru un algoritm de clusterizare (K-Means). Pentru a stabili daca etichetele generate de algoritmul nesupervizat corespund celor atasate imaginilor am comparat rezultatele cu un set de imagini de referinta alese de mana.
 
+\section{Setul de date}
+Pentru acest proiect am folosit setul de date aferent competitiei Invasive Species Monitoring\cite{WEBSITE:6} de pe Kaggle. Acesta consta din 2295 de imagini etichetate manual. Imaginile au fost facute intr-o padure din Brazilia si o parte din ele contin specia invaziva Hydrangea. 1448 de imagini din setul total contin Hydrangea, deci 63\% din exemple sunt pozitive. Toate imaginile sunt color si au dimensiunea 866x1154 pixeli. Majoritatea imaginilor pozitive contin tufe de Hydrangea in centrul imaginii. Imaginile negative contin scene din padure, iar in unele apar lacuri sau oameni.Un exemplu de imagine pozitiva si negativa poate fi vazut in \ref{fig:posneg}.
 
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{pos.jpg}
+    \caption{Tufa de Hydrangea.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{neg.jpg}
+    \caption{Imagine din padure.}
+  \end{subfigure}
+  \caption{Exemplu imagini pozitive si negative.}
+  \label{fig:posneg}
+\end{figure}
 
 \bibliography{bibliografie} 
 \bibliographystyle{ieeetr}
