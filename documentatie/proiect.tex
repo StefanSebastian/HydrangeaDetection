@@ -2,6 +2,7 @@
 
 \usepackage{url}
 \usepackage{hyperref}
+
 \usepackage{graphicx}
 \usepackage{subcaption}
 
@@ -67,6 +68,29 @@ Pentru acest proiect am folosit setul de date aferent competitiei Invasive Speci
   \label{fig:posneg}
 \end{figure}
 
+
+\section{Parametraj algoritmi}
+
+\subsection{Abordarea 1}
+
+In primul rand am incercat sa determin cea mai potrivita arhitectura pentru autoencoder. Am rulat mai multe experimente, cu 1, 3 si 4 straturi de convolutie in modelul de codificare. Am observat ca acuratetea nu variaza foarte mult, deci am ales sa folosesc un singur strat de convolutie pentru simplitate.\ref{tab:arh}
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{Arhitectura autoencoder}
+    \label{tab:arh}
+    \begin{tabular}{c|c|c|c|c}
+      \textbf{ConvolutionLayers} & \textbf{Epochs} & \textbf{BatchSize} & \textbf{EncodingLoss} & \textbf{Accuracy}\\
+      \hline
+      4 & 50 & 20 & 0.62 & 54\% \\
+      1 & 50 & 20 & 0.59 & 56\% \\
+      3 & 50 & 20 & 0.6 & 54\%  \\
+      1 & 50 & 50 & 0.58 & 55\% \\
+      \end{tabular}
+  \end{center}
+\end{table}
+
+\newpage
 \bibliography{bibliografie} 
 \bibliographystyle{ieeetr}
 
