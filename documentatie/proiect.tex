@@ -25,6 +25,10 @@ O specie de animal sau planta introdusa intr-un mediu nou fata de cel in care a 
  
 De exemplu, insecta Adelges tsugae, originara din Asia, a dus la uciderea a pana la 80\% din coniferele din specia Tsuga, din unele parti din America de Nord\cite{WEBSITE:2}. In 1946, 20 de castori au fost adusi pe o insula de langa Argentina pentru a fi vanati pentru blana lor. Acestia s-au inmultit si s-au raspandit pe continent si pe insulele din jur. Copacii din zona nu sunt adaptati la activitatea castorilor si majoritatea nu mai cresc dupa ce sunt rosi de acestia. De asemenea castorii creeaza corpuri de apa statatoare care altereaza ciclul nutrientilor din paduri\cite{WEBSITE:3}. Unele specii, precum Scoica Zebra, pot aduce si costuri economice. Acestea blocheaza centrale electrice si instalatii de tratare a apei iar inlaturarea lor din Marile Lacuri(America de Nord) costa aproximativ 500mil\$ anual\cite{WEBSITE:5}.
 
+Existe mai multe modalitati prin care o specie invaziva poate intra intr-un mediu nou. Unele specii sunt aduse intentionat, dar consecintele sunt neprevazute. De exemplu, Vitex Rotundifolia a fost introdusa in Carolina de Nord in anii 80 ca planta ornamentala. Aceasta insa s-a dovedit a fii daunatoare pentru plantele native si pentru habitatul testoaselor\cite{WEBSITE:7}. Exista specii care sunt aduse in gradini zoologice, acvarii iar apoi scapa accidental, precum Pestii de foc care au ajuns in Caraibe dupa ce au scapat dintr-un acvariu in timpul Uraganului Andrew \cite{WEBSITE:8}. Multe specii ajung in medii noi accidental prin activitatile de transport international. Ciuperca Cryphonectria parasitica a ajuns in America prin intermediul castanilori importati din Japonia in secolul 19\cite{WEBSITE:9}.
+
+Rata de raspandire a acestor specii este in crestere. Conform estimarilor lui Mack, 3\% din suprafata neinghetata a Pamantului este dominata de specii invazive\cite{BOOK:3}. In Statele Unite aproximativ 700 000 de hectare sunt invadate in fiecare an de plante invazive\cite{ARTICLE:5}.  
+
 Pentru identificarea unei astfel de specii este nevoie de specialisti care sa se deplaseze pe teren si sa noteze speciile prezente. O astfel de abordare este scumpa (e nevoie de un numar mare de oameni pregatiti) si ineficienta (oamenii nu pot acoperi zone foarte mari).
 
 Solutia pe care o propunem este identificarea automata a speciilor invazive din imagini. Aceste imagini pot fi capturate automat de camere montate in anumite zone si detectia speciilor invazive se poate face automat, fara nevoie de asistenta umana. Totusi, este necesar un set de date cuprinzator (cateva mii de imagini).
@@ -212,14 +216,17 @@ unde
 Folosind parametrii optimi determinati experimental, imagini prelucrate la dimensiuni de (200, 200), color, functia de distanta Cosinus, encoding cu un singur strat convolutiv pe toate cele 2295 de imagini am obtinut urmatoarele rezultate \ref{tab:resNum}.
 \begin{table}[h!]
   \begin{center}
-    \caption{Rezultate batch size}
+    \caption{Rezultate numerice}
     \label{tab:resNum}
     \begin{tabular}{c|c|c|c|c}
       \textbf{Epochs} & \textbf{BatchSize} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} \\
       \hline
-      10 & 150 & 65\% & 0.76 & 0.65 \\
+      15 & 250 & 59\% & 0.72 & 0.59 \\
       20 & 200 & 64\% & 0.75 & 0.63 \\
       20 & 150 & 64\% & 0.75 & 0.63 \\
+      30 & 250 & 64\% & 0.75 & 0.64 \\
+      10 & 300 & 64\% & 0.76 & 0.61 \\
+      10 & 150 & 65\% & 0.76 & 0.65 \\
       \end{tabular}
   \end{center}
 \end{table}
